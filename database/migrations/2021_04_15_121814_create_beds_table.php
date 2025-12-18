@@ -15,11 +15,13 @@ class CreateBedsTable extends Migration
     {
         Schema::create('beds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rooms_id');
-            $table->foreignId('patients_id');
-            $table->string('alloted_time');
-            $table->string('discharge_time');
+            $table->foreignId('room_id')->constrained();
+            $table->foreignId('patient_id')->nullable()->constrained();
+            $table->enum('status', ['alloted', 'available'])->default('available');
+            $table->timestamp("alloted_time")->nullable();
+            $table->timestamp("discharge_time")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

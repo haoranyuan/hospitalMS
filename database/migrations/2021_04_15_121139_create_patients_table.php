@@ -16,14 +16,22 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("email");
-            $table->string("photo_path");
-            $table->string("gender");
-            $table->string("age");
-            $table->string("phone");
-            $table->string("address");
-            $table->foreignId('bloodgroups_id');
+            $table->string("email")->nullable();
+            $table->string("phone")->nullable();
+            $table->string("address")->nullable();
+            $table->string("gender")->nullable();
+            $table->string("age")->nullable();
+            $table->string('bloodgroup')->nullable();
+            $table->string("photo_path")->nullable();
+            $table->enum("status", ["admitted", "discharged", "pending"])->default("pending");
+            $table->string("image")->nullable();
+            $table->string("description")->nullable();
+            $table->string("disease")->nullable();
+            $table->string("doctor")->nullable();
+            $table->string("admit_date")->nullable();
+            $table->string("discharge_date")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

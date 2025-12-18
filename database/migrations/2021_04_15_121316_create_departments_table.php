@@ -18,7 +18,10 @@ class CreateDepartmentsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('photo_path');
+            $table->foreignId('hod_id')->constrand();
+            $table->foreignId('block_id')->constrand();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

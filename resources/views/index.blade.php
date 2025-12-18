@@ -1,13 +1,12 @@
 @extends('layouts.app')
 @section('content')
-
-<div id="home" class="parallax first-section wow fadeIn" data-stellar-background-ratio="0.4" style="background-image:url('images/slider-bg.png');">
+<div id="home" class="parallax first-section wow fadeIn" data-stellar-background-ratio="0.4" style="background-image:url('images/slider-bg.png');" {{ $app = App\Models\settings::latest()->first() }}>
    <div class="container">
       <div class="row">
          <div class="col-md-12 col-sm-12">
             <div class="text-contant">
                <h2>
-                  <span class="center"><span class="icon"><img src="images/icon-logo.png" alt="#" /></span></span>
+                  <span class="center"><span class="icon"><img src="{{ ($app) ? config('app.url').'storage/'. $app->icon_logo_path:'images/icon-logo.png' }}" alt="#" /></span></span>
                   <a href="" class="typewrite" data-period="2000" data-type='[ "Welcome to Life Care", "We Care Your Health", "We are Expert!" ]'>
                   <span class="wrap"></span>
                   </a>
@@ -34,7 +33,7 @@
       <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
          <div class="row">
             <div class="service-time middle" style="background:#0071d1;">
-               <span class="info-icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span> 
+               <span class="info-icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                <h3>Working Hours</h3>
                <div class="time-table-section">
                   <ul>
@@ -60,7 +59,7 @@
 <div id="about" class="section wow fadeIn">
    <div class="container">
       <div class="heading">
-         <span class="icon-logo"><img src="images/icon-logo.png" alt="#"></span>
+         <span class="icon-logo"><img src="{{ ($app) ? 'storage/'.$app->icon_logo_path:'images/icon-logo.png' }}" alt="#"></span>
          <h2>The Specialist Clinic</h2>
       </div>
       <!-- end title -->
@@ -134,126 +133,59 @@
    <!-- end container -->
 </div>
 <div id="service" class="services wow fadeIn">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-            <div class="inner-services">
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon1.png" alt="#" /></span>
-                     <h4>PREMIUM FACILITIES</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon2.png" alt="#" /></span>
-                     <h4>LARGE LABORATORY</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon3.png" alt="#" /></span>
-                     <h4>DETAILED SPECIALIST</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon4.png" alt="#" /></span>
-                     <h4>CHILDREN CARE CENTER</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon5.png" alt="#" /></span>
-                     <h4>FINE INFRASTRUCTURE</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                  <div class="serv">
-                     <span class="icon-service"><img src="images/service-icon6.png" alt="#" /></span>
-                     <h4>ANYTIME BLOOD BANK</h4>
-                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="appointment-form">
-               <h3><span>+</span> Book Appointment</h3>
-               <div class="form">
-                  <form action="index.html">
-                     <fieldset>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <div class="row">
-                              <div class="form-group">
-                                 <input type="text" id="name" placeholder="Your Name"  />
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <div class="row">
-                              <div class="form-group">
-                                 <input type="email" placeholder="Email Address" id="email" />
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-section">
-                           <div class="row">
-                              <div class="form-group">
-                                 <select class="form-control">
-                                    <option>Day</option>
-                                    <option>Sunday</option>
-                                    <option>Monday</option>
-                                 </select>
-                              </div>
-                              <div class="form-group">
-                                 <select class="form-control">
-                                    <option>Time</option>
-                                    <option>AM</option>
-                                    <option>PM</option>
-                                 </select>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <div class="row">
-                              <div class="form-group">
-                                 <select class="form-control">
-                                    <option>Doctor Name</option>
-                                    <option>Mr.XYZ</option>
-                                    <option>Mr.ABC</option>
-                                 </select>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <div class="row">
-                              <div class="form-group">
-                                 <textarea rows="4" id="textarea_message" class="form-control" placeholder="Your Message..."></textarea>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <div class="row">
-                              <div class="form-group">
-                                 <div class="center"><button type="submit">Submit</button></div>
-                              </div>
-                           </div>
-                        </div>
-                     </fieldset>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- end section -->
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+             <div class="inner-services">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon1.png" alt="#" /></span>
+                      <h4>PREMIUM FACILITIES</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon2.png" alt="#" /></span>
+                      <h4>LARGE LABORATORY</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon3.png" alt="#" /></span>
+                      <h4>DETAILED SPECIALIST</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon4.png" alt="#" /></span>
+                      <h4>CHILDREN CARE CENTER</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon5.png" alt="#" /></span>
+                      <h4>FINE INFRASTRUCTURE</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <div class="serv">
+                      <span class="icon-service"><img src="images/service-icon6.png" alt="#" /></span>
+                      <h4>ANYTIME BLOOD BANK</h4>
+                      <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+          @livewire('appointmentform')
+       </div>
+    </div>
+ </div>
+ <!-- end section -->
 
 <!-- doctor -->
 
@@ -261,7 +193,7 @@
   <div class="container">
 
    <div class="heading">
-         <span class="icon-logo"><img src="images/icon-logo.png" alt="#"></span>
+         <span class="icon-logo"><img src="{{ ($app) ? 'storage/'.$app->icon_logo_path:'images/icon-logo.png' }}" alt="#"></span>
          <h2>The Specialist Clinic</h2>
       </div>
 
@@ -327,7 +259,7 @@
   </div><!-- end container -->
 </div>
 
-<div id="price" class="section pr wow fadeIn" style="background-image:url('images/price-bg.png');">
+{{-- <div id="price" class="section pr wow fadeIn" style="background-image:url('images/price-bg.png');">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -451,12 +383,12 @@
    </div>
 </div>
 
-<!-- end doctor section -->
+<!-- end doctor section --> --}}
 
 <div id="testimonials" class="section wb wow fadeIn">
    <div class="container">
       <div class="heading">
-         <span class="icon-logo"><img src="images/icon-logo.png" alt="#"></span>
+         <span class="icon-logo"><img src="{{ ($app) ? 'storage/'.$app->icon_logo_path:'images/icon-logo.png' }}" alt="#"></span>
          <h2>Testimonials</h2>
       </div>
       <!-- end title -->
@@ -534,116 +466,11 @@
 <div id="getintouch" class="section wb wow fadeIn" style="padding-bottom:0;">
    <div class="container">
       <div class="heading">
-         <span class="icon-logo"><img src="images/icon-logo.png" alt="#"></span>
+         <span class="icon-logo"><img src="{{ ($app) ? 'storage/'.$app->icon_logo_path:'images/icon-logo.png' }}" alt="#"></span>
          <h2>Get in Touch</h2>
       </div>
    </div>
-   <div class="contact-section">
-      <div class="form-contant">
-         <form id="ajax-contact" action="assets/mailer.php" method="post">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="form-group in_name">
-                     <input type="text" class="form-control" placeholder="Name" required="required">
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group in_email">
-                     <input type="email" class="form-control" placeholder="E-mail" required="required">
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group in_email">
-                     <input type="tel" class="form-control" id="phone" placeholder="Phone" required="required">
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group in_email">
-                     <input type="text" class="form-control" id="subject" placeholder="Subject" required="required">
-                  </div>
-               </div>
-               <div class="col-md-12">
-                  <div class="form-group in_message"> 
-                     <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required"></textarea>
-                  </div>
-                  <div class="actions">
-                     <input type="submit" value="Send Message" name="submit" id="submitButton" class="btn small" title="Submit Your Message!">
-                  </div>
-               </div>
-            </div>
-         </form>
-      </div>
-      <div id="googleMap" style="width:100%;height:450px;"></div>
-   </div>
+@livewire('contactus')
 </div>
-<footer id="footer" class="footer-area wow fadeIn">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-4">
-            <div class="logo padding">
-               <a href=""><img src="images/logo.png" alt=""></a>
-               <p>Locavore pork belly scen ester pine est chill wave microdosing pop uple itarian cliche artisan.</p>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <div class="footer-info padding">
-               <h3>CONTACT US</h3>
-               <p><i class="fa fa-map-marker" aria-hidden="true"></i> PO Box 16122 Collins Street West Victoria 8007 Australia</p>
-               <p><i class="fa fa-paper-plane" aria-hidden="true"></i> info@gmail.com</p>
-               <p><i class="fa fa-phone" aria-hidden="true"></i> (+1) 800 123 456</p>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <div class="subcriber-info">
-               <h3>SUBSCRIBE</h3>
-               <p>Get healthy news, tip and solutions to your problems from our experts.</p>
-               <div class="subcriber-box">
-                  <form id="mc-form" class="mc-form">
-                     <div class="newsletter-form">
-                        <input type="email" autocomplete="off" id="mc-email" placeholder="Email address" class="form-control" name="EMAIL">
-                        <button class="mc-submit" type="submit"><i class="fa fa-paper-plane"></i></button> 
-                        <div class="clearfix"></div>
-                        <!-- mailchimp-alerts Start -->
-                        <div class="mailchimp-alerts">
-                           <div class="mailchimp-submitting"></div>
-                           <!-- mailchimp-submitting end -->
-                           <div class="mailchimp-success"></div>
-                           <!-- mailchimp-success end -->
-                           <div class="mailchimp-error"></div>
-                           <!-- mailchimp-error end -->
-                        </div>
-                        <!-- mailchimp-alerts end -->
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</footer>
-<div class="copyright-area wow fadeIn">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-8">
-            <div class="footer-text">
-               <p>© 2018. Distributed by <a id="tw" href="https://themewagon.com/" target="_blank">ThemeWagon</a></p>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <div class="social">
-               <ul class="social-links">
-                  <li><a href=""><i class="fa fa-rss"></i></a></li>
-                  <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                  <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                  <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-                  <li><a href=""><i class="fa fa-youtube"></i></a></li>
-                  <li><a href=""><i class="fa fa-pinterest"></i></a></li>
-               </ul>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- end copyrights -->
 
 @endsection
