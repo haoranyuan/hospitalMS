@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateRoomsTable extends Migration
 {
@@ -17,11 +18,14 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('department_id')->constrained();
-            $table->enum('status', ['available', 'occupied', 'maintenance'])->default('available');
-            $table->enum('type', ['ward', 'private', 'semi-private', 'general'])->default('general');
+            $table->string('status')->default('available');
+            $table->string('type')->default('general');
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE rooms ADD CONSTRAINT rooms_status_check CHECK (status IN ('available', 'occupied', 'maintenance'))");
+        DB::statement("ALTER TABLE rooms ADD CONSTRAINT rooms_type_check CHECK (type IN ('ward', 'private', 'semi-private', 'general'))");
     }
 
     /**

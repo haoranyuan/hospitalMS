@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreatePatientCheckupsTable extends Migration
 {
@@ -18,9 +19,11 @@ class CreatePatientCheckupsTable extends Migration
             $table->foreignId('patient_id')->constrained();
             $table->foreignId('doctor_id')->constrained();
             $table->string('description');
-            $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE patient_checkups ADD CONSTRAINT patient_checkups_status_check CHECK (status IN ('pending', 'completed'))");
     }
 
     /**

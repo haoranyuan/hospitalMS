@@ -32,24 +32,24 @@ services:
     depends_on:
       - app
 
-  # MySQL Service
+  # PostgreSQL Service
   db:
-    image: mysql:8.0
+    image: postgres:16
     container_name: hospitalms_db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: hospitalms
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_USER: hospitalms
-      MYSQL_PASSWORD: password
+      POSTGRES_DB: hospitalms
+      POSTGRES_USER: hospitalms
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
     networks:
       - hospitalms_network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      test: ["CMD-SHELL", "pg_isready -U hospitalms -d hospitalms"]
       interval: 10s
       timeout: 5s
       retries: 5

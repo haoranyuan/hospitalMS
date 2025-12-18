@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateStaysTable extends Migration
 {
@@ -17,14 +18,16 @@ class CreateStaysTable extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained();
             $table->foreignId('room_id')->constrained();
-            $table->string('start_time')->nullable()->default(time());
-            $table->string('end_time')->nullable()->default(time());
-            $table->enum('status', ['active', 'completed'])->default('active');
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
+            $table->string('status')->default('active');
             $table->string('amount')->nullable();
             $table->string('discount')->nullable();
             $table->string('total')->nullable();
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE stays ADD CONSTRAINT stays_status_check CHECK (status IN ('active', 'completed'))");
     }
 
     /**

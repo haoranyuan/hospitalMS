@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateAppointmentsTable extends Migration
 {
@@ -19,12 +20,14 @@ class CreateAppointmentsTable extends Migration
             $table->foreignId('doctor_id')->constrained();
             $table->timestamp('intime');
             $table->timestamp('outtime')->nullable();
-            $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('status')->default('pending');
             $table->string('description');
             $table->string('prescription')->nullable();
             $table->timestamps();
             // $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE appointments ADD CONSTRAINT appointments_status_check CHECK (status IN ('pending', 'completed'))");
     }
 
     /**

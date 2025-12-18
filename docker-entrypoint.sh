@@ -5,7 +5,7 @@ echo "Starting Laravel application setup..."
 
 # Wait for database to be ready
 echo "Waiting for database connection..."
-until php -r "try { \$pdo = new PDO('mysql:host=db;port=3306', 'hospitalms', 'password'); echo 'Database is ready\n'; exit(0); } catch (PDOException \$e) { exit(1); }" 2>/dev/null; do
+until php -r "try { \$pdo = new PDO('pgsql:host=db;port=5432;dbname=hospitalms', 'hospitalms', 'password'); echo 'Database is ready\n'; exit(0); } catch (PDOException \$e) { exit(1); }" 2>/dev/null; do
     echo "Database is unavailable - sleeping"
     sleep 2
 done

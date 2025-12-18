@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreatePatientsTable extends Migration
 {
@@ -23,7 +24,7 @@ class CreatePatientsTable extends Migration
             $table->string("age")->nullable();
             $table->string('bloodgroup')->nullable();
             $table->string("photo_path")->nullable();
-            $table->enum("status", ["admitted", "discharged", "pending"])->default("pending");
+            $table->string("status")->default("pending");
             $table->string("image")->nullable();
             $table->string("description")->nullable();
             $table->string("disease")->nullable();
@@ -33,6 +34,8 @@ class CreatePatientsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE patients ADD CONSTRAINT patients_status_check CHECK (status IN ('admitted', 'discharged', 'pending'))");
     }
 
     /**

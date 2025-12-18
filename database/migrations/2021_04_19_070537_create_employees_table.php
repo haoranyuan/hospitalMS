@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateEmployeesTable extends Migration
 {
@@ -21,12 +22,15 @@ class CreateEmployeesTable extends Migration
             $table->string("salary")->nullable();
             $table->string("address")->nullable();
             $table->string("qualification")->nullable();
-            $table->enum("position", ["nurse", "doctor", "accountant", "pharmacist", "receptionist", "cleaner", "security", "other"])->default("other");
-            $table->enum("status", ["active", "inactive"])->default("active");
+            $table->string("position")->default("other");
+            $table->string("status")->default("active");
             $table->string("image")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE employees ADD CONSTRAINT employees_position_check CHECK (position IN ('nurse', 'doctor', 'accountant', 'pharmacist', 'receptionist', 'cleaner', 'security', 'other'))");
+        DB::statement("ALTER TABLE employees ADD CONSTRAINT employees_status_check CHECK (status IN ('active', 'inactive'))");
     }
 
     /**

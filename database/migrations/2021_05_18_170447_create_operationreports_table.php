@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateOperationreportsTable extends Migration
 {
@@ -18,10 +19,12 @@ class CreateOperationreportsTable extends Migration
             $table->foreignId("patient_id")->constrained()->cascadeOnDelete();
             $table->text("description");
             $table->foreignId("doctor_id")->constrained()->cascadeOnDelete();
-            $table->enum("status", ["pending", "completed"])->default("pending");
+            $table->string("status")->default("pending");
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement("ALTER TABLE operationreports ADD CONSTRAINT operationreports_status_check CHECK (status IN ('pending', 'completed'))");
     }
 
     /**
