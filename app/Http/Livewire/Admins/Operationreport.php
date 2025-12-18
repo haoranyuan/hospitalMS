@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\doctor;
 use App\Models\operationreport as ModelsOperationreport;
 use App\Models\patient;
-use Livewire\WithFileUploads;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
 
 class Operationreport extends Component

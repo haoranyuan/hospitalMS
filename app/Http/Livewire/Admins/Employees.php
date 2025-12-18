@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admins;
 use App\Models\doctor;
 use App\Models\employee;
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
 
 class Employees extends Component
