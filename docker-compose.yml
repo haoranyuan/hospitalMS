@@ -1,0 +1,81 @@
+services:
+  # PHP-FPM Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hospitalms_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - hospitalms_network
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: hospitalms_webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - hospitalms_network
+    depends_on:
+      - app
+
+  # MySQL Service
+  db:
+    image: mysql:8.0
+    container_name: hospitalms_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: hospitalms
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: hospitalms
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - hospitalms_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Service
+  redis:
+    image: redis:alpine
+    container_name: hospitalms_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - hospitalms_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Networks
+networks:
+  hospitalms_network:
+    driver: bridge
+
+# Volumes
+volumes:
+  db_data:
+    driver: local
+
